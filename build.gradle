@@ -1,14 +1,15 @@
-buildscript {
-    dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-allopen")
-        classpath("org.jetbrains.kotlin:kotlin-noarg")
-    }
-}
+//buildscript {
+//    dependencies {
+//        classpath("org.jetbrains.kotlin:kotlin-allopen")
+//        classpath("org.jetbrains.kotlin:kotlin-noarg")
+//    }
+//}
 
 plugins {
     id("org.jetbrains.kotlin.jvm") version "1.4.10"
     id("org.jetbrains.kotlin.kapt") version "1.4.10"
     id("org.jetbrains.kotlin.plugin.allopen") version "1.4.10"
+    id("org.jetbrains.kotlin.plugin.noarg") version "1.4.10"
     id("org.jetbrains.kotlin.plugin.jpa") version "1.4.10"
     id("com.github.johnrengelman.shadow") version "6.1.0"
     id("io.micronaut.application") version "1.4.2"
@@ -55,6 +56,10 @@ dependencies {
     implementation("io.micronaut.data:micronaut-data-hibernate-jpa")
     implementation("mysql:mysql-connector-java:5.1.37")
 
+
+    //Hibernate validator
+    implementation("io.micronaut.beanvalidation:micronaut-hibernate-validator")
+    implementation("org.hibernate:hibernate-validator:6.1.6.Final")
 
 }
 

@@ -6,8 +6,8 @@ import io.micronaut.data.jpa.repository.JpaRepository
 import java.util.*
 
 @Repository
-interface ChaveRepository : JpaRepository<Chave, Long> {
+interface ChavePixRepository : JpaRepository<ChavePix, Long> {
 
-    @Query("select c from Chave c where c.tipo = :tipo and c.key = :key")
-    fun findByTipoAndKey(tipo: KeyType, key: String): Optional<Chave>
+    @Query("select c from ChavePix c where c.chave = :chave")
+    fun findByChave(chave: String): Optional<ChavePix>
 }
