@@ -19,3 +19,11 @@ datasources:
     schema-generate: CREATE_DROP
 
 jpa.default.properties.hibernate.hbm2ddl.auto: update
+
+itau:
+  erp:
+    server-url: 'http://localhost:9091'
+
+bcb:
+  pix:
+    server-url: 'http://localhost:8082'

@@ -1,8 +1,10 @@
 package br.com.zup.chaves
 
+import br.com.zup.DeletaChavePixGrpcRequest
 import br.com.zup.KeymanagerGrpcRequest
 import br.com.zup.TipoDaChave
 import br.com.zup.TipoDaConta
+import br.com.zup.chaves.deleta.DeletarChavePixRequest
 
 fun KeymanagerGrpcRequest.paraChave() : NovaChavePix {
     return NovaChavePix(
@@ -16,5 +18,12 @@ fun KeymanagerGrpcRequest.paraChave() : NovaChavePix {
             TipoDaConta.UNKNOWN_TIPO_CONTA -> null
             else -> TipoDaConta.valueOf(tipoDaConta.name)
         }
+    )
+}
+
+fun DeletaChavePixGrpcRequest.paraDeletarChaveRequest(): DeletarChavePixRequest {
+    return DeletarChavePixRequest(
+        chaveId = chaveId,
+        clienteId = clienteId
     )
 }

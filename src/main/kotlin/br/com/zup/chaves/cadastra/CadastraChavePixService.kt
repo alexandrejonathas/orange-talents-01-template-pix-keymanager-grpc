@@ -1,25 +1,23 @@
-package br.com.zup.chaves
+package br.com.zup.chaves.cadastra
 
+import br.com.zup.chaves.*
 import br.com.zup.contas.ContaClient
 import br.com.zup.contas.ContaRepository
 import br.com.zup.exceptions.ChavePixExistenteException
 import io.micronaut.http.client.exceptions.HttpClientResponseException
 import io.micronaut.validation.Validated
-import org.slf4j.LoggerFactory
 import javax.inject.Singleton
 import javax.transaction.Transactional
 import javax.validation.Valid
 
 @Validated
 @Singleton
-class NovaChavePixService(
+class CadastraChavePixService(
     val chaveRepository: ChavePixRepository,
     val contaRepository: ContaRepository,
     val contaClient: ContaClient,
-    val keyManagerClient: CadastrarChaveClient,
+    val keyManagerPixClient: ChavePixClient,
 ) {
-
-    val logger = LoggerFactory.getLogger(this::class.java)
 
     @Transactional
     fun registra(@Valid novaChave: NovaChavePix?): ChavePix {
@@ -36,13 +34,20 @@ class NovaChavePixService(
             .let { contaResponse -> contaRepository.save(contaResponse.paraConta()) }
 
         try {
-            val createPixResponse = novaChave?.paraChaveRequest(conta)
-                .let { chavePix -> keyManagerClient.cadastra(chavePix) }
-
-            var chaveCriada = novaChave.paraChavePix(conta, createPixResponse.createdAt)
+            var chaveCriada = novaChave.paraChavePix(conta)
                 .let { chavePix ->
-                chaveRepository.save(chavePix)
-            }
+                    chaveRepository.save(chavePix)
+                }
+
+            val createPixResponse = novaChave?.paraChaveRequest(conta)
+                .let { chavePix -> keyManagerPixClient.cadastra(chavePix) }
+
+
+            chaveCriada = chaveCriada.let { chavePix ->
+                    chavePix.chave = createPixResponse.key
+                    chavePix.criadoEm = createPixResponse.createdAt
+                    chaveRepository.update(chavePix)
+                }
 
             return chaveCriada
         } catch (e: HttpClientResponseException) {

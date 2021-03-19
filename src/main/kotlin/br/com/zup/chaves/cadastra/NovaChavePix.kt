@@ -2,6 +2,7 @@ package br.com.zup.chaves
 
 import br.com.zup.TipoDaConta
 import br.com.zup.contas.Conta
+import br.com.zup.contas.TipoConta
 import br.com.zup.validations.ValidPixKey
 import br.com.zup.validations.ValidUUID
 import io.micronaut.core.annotation.Introspected
@@ -24,12 +25,11 @@ data class NovaChavePix(
     @field:NotNull
     val tipoDaConta: TipoDaConta?
 ){
-    fun paraChavePix(conta: Conta, criadoEm: LocalDateTime): ChavePix{
+    fun paraChavePix(conta: Conta): ChavePix{
         return ChavePix(
             chave = if(tipoDaChave == TipoDaChave.CHAVE_ALEATORIA) UUID.randomUUID().toString() else chave,
             tipo = tipoDaChave?.name!!,
-            conta = conta,
-            criadoEm = criadoEm)
+            conta = conta)
     }
 
     fun paraChaveRequest(conta: Conta): NovaChaveRequest {
@@ -72,3 +72,38 @@ data class BankAccount(
     val accountNumber: String,
     val accountType: AccountType
 )
+
+enum class AccountType {
+    CACC, SVGS;
+
+    companion object {
+        fun getAccountType(tipoConta: TipoConta): AccountType {
+            if("CONTA_CORRENTE".equals(tipoConta.name)){
+                return CACC
+            }
+            return SVGS
+        }
+    }
+}
+
+enum class KeyType {
+
+    CPF, CNPJ, PHONE, EMAIL, RANDOM;
+
+    companion object {
+        fun getKeyType(tipoDaChave: TipoDaChave): KeyType {
+            if (CPF.name.equals(tipoDaChave.name)){
+                return CPF
+            }else if(CNPJ.name.equals(tipoDaChave.name)){
+                return CNPJ
+            }else if("TELEFONE_CELULAR".equals(tipoDaChave.name.toString())){
+                return PHONE
+            }else if(EMAIL.name.equals(tipoDaChave.name)){
+                return EMAIL
+            }
+
+            return RANDOM
+        }
+    }
+
+}

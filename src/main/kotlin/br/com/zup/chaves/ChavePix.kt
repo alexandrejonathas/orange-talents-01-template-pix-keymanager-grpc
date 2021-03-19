@@ -1,6 +1,5 @@
 package br.com.zup.chaves
 
-import br.com.zup.TipoDaChave
 import br.com.zup.contas.Conta
 import java.time.LocalDateTime
 import javax.persistence.*
@@ -11,15 +10,15 @@ import javax.validation.constraints.NotNull
 @Table(name = "chaves_pix")
 class ChavePix(
     @field:NotBlank
-    val chave: String,
+    var chave: String,
     @field:NotNull
     val tipo: String,
     @field:ManyToOne
-    val conta: Conta,
-    val criadoEm: LocalDateTime?) {
+    val conta: Conta) {
 
     @Id
     @GeneratedValue
     var id: Long? = null
 
+    var criadoEm: LocalDateTime? = null
 }

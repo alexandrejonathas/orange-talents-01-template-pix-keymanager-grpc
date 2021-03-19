@@ -1,8 +1,10 @@
-package br.com.zup.chaves
+package br.com.zup.chaves.cadastra
 
 import br.com.zup.KeymanagerGrpcRequest
 import br.com.zup.KeymanagerGrpcResponse
 import br.com.zup.KeymanagerGrpcServiceGrpc
+import br.com.zup.handlers.ErrorHandler
+import br.com.zup.chaves.paraChave
 import io.grpc.stub.StreamObserver
 import org.slf4j.LoggerFactory
 import javax.inject.Singleton
@@ -10,7 +12,7 @@ import javax.inject.Singleton
 @ErrorHandler
 @Singleton
 class CadastraChaveEndpoint(
-    val service: NovaChavePixService
+    val service: CadastraChavePixService
 ): KeymanagerGrpcServiceGrpc.KeymanagerGrpcServiceImplBase() {
 
     val logger = LoggerFactory.getLogger(this::class.java)

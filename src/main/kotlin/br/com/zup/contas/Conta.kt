@@ -1,6 +1,5 @@
 package br.com.zup.contas
 
-import io.micronaut.data.annotation.Relation
 import javax.persistence.*
 
 @Entity

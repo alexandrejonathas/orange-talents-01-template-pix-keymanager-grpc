@@ -1,4 +1,4 @@
-package br.com.zup.chaves
+package br.com.zup.handlers
 
 import br.com.zup.handlers.ExceptionHandlerInterceptor
 import io.micronaut.aop.Around

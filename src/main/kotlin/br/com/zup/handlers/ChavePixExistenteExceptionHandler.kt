@@ -5,7 +5,7 @@ import io.grpc.Status
 import javax.inject.Singleton
 
 @Singleton
-class ChavePixExceptionHandler: ExceptionHandler<ChavePixExistenteException> {
+class ChavePixExistenteExceptionHandler: ExceptionHandler<ChavePixExistenteException> {
     override fun handle(e: ChavePixExistenteException): StatusWithDetails {
         return StatusWithDetails(
             Status.ALREADY_EXISTS.withDescription(e.message).withCause(e)
