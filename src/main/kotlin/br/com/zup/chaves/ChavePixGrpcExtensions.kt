@@ -5,8 +5,17 @@ import br.com.zup.ConsultaChavePixRequest.FiltroCase.*
 import br.com.zup.TipoDaChave
 import br.com.zup.chaves.cosulta.Filtro
 import br.com.zup.chaves.deleta.DeletarChavePixRequest
+import br.com.zup.chaves.lista.ListaChavePix
+import com.google.protobuf.Timestamp
 import io.micronaut.validation.validator.Validator
+import java.time.LocalDateTime
 import javax.validation.ConstraintViolationException
+import java.time.ZoneOffset
+
+import java.time.Instant
+
+
+
 
 fun CadastraChavePixRequest.paraChave() : NovaChavePix {
     return NovaChavePix(
@@ -47,4 +56,18 @@ fun ConsultaChavePixRequest.paraFiltro(
         throw ConstraintViolationException(violations)
     }
     return filtro
+}
+
+fun ListaChavePixRequest.paraListaChavePix(): ListaChavePix {
+    return ListaChavePix(clienteId = clienteId)
+}
+
+fun LocalDateTime.toTimestampGrpc(): Timestamp {
+
+    val instant: Instant = this.toInstant(ZoneOffset.UTC)
+
+    return Timestamp.newBuilder()
+        .setSeconds(instant.epochSecond)
+        .setNanos(instant.nano)
+        .build()
 }
