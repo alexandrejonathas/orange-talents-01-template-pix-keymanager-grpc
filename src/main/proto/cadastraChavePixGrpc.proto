@@ -2,13 +2,13 @@ syntax = "proto3";
 
 option java_multiple_files = true;
 option java_package = "br.com.zup";
-option java_outer_classname = "KeymanagerGrpc";
+option java_outer_classname = "CadastraChavePixGrpc";
 option objc_class_prefix = "HLW";
 
 package br.com.zup;
 
-service KeymanagerGrpcService {
-  rpc cadastrar (KeymanagerGrpcRequest) returns (KeymanagerGrpcResponse) {}
+service CadastraChavePixGrpcService {
+  rpc cadastrar (CadastraChavePixRequest) returns (CadastraChavePixResponse) {}
 }
 
 enum TipoDaChave {
@@ -25,13 +25,13 @@ enum TipoDaConta {
   CONTA_POUPANCA = 2;
 }
 
-message KeymanagerGrpcRequest {
+message CadastraChavePixRequest {
   string clientId = 1;
   TipoDaChave tipoDaChave = 2;
   string chave = 3;
   TipoDaConta tipoDaConta = 4;
 }
 
-message KeymanagerGrpcResponse {
+message CadastraChavePixResponse {
   string keyId = 1;
 }

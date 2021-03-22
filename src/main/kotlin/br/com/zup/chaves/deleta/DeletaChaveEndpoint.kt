@@ -3,7 +3,6 @@ package br.com.zup.chaves.deleta
 import br.com.zup.DeletaChavePixGrpcRequest
 import br.com.zup.DeletaChavePixGrpcResponse
 import br.com.zup.DeletaChavePixGrpcServiceGrpc
-import br.com.zup.KeymanagerGrpcResponse
 import br.com.zup.chaves.paraDeletarChaveRequest
 import br.com.zup.handlers.ErrorHandler
 import io.grpc.stub.StreamObserver

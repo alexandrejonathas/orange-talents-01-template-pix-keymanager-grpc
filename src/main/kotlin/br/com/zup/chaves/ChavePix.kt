@@ -21,4 +21,8 @@ class ChavePix(
     var id: Long? = null
 
     var criadoEm: LocalDateTime? = null
+
+    fun pertence(clienteId: String): Boolean{
+        return this.conta.titular?.id.equals(clienteId)
+    }
 }

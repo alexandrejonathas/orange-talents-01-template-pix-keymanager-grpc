@@ -2,7 +2,7 @@ package br.com.zup.chaves.deleta
 
 import br.com.zup.chaves.ChavePixClient
 import br.com.zup.chaves.ChavePixRepository
-import br.com.zup.exceptions.ChaveNaoEncontradaException
+import br.com.zup.exceptions.ChavePixNaoEncontradaException
 import io.micronaut.http.HttpStatus
 import io.micronaut.validation.Validated
 import org.slf4j.LoggerFactory
@@ -24,7 +24,7 @@ class DeletaChaveService(
         val possivelChave = chavePixRepository.findById(deletarChavePixRequest.chaveId)
 
         if(possivelChave.isEmpty){
-            throw ChaveNaoEncontradaException("chave pix ${deletarChavePixRequest.chaveId} não encontrada")
+            throw ChavePixNaoEncontradaException("chave pix ${deletarChavePixRequest.chaveId} não encontrada")
         }
 
         val chavePix = possivelChave.get()
@@ -35,7 +35,6 @@ class DeletaChaveService(
         chavePixRepository.delete(chavePix)
 
         val response = chavePixClient.deleta(chavePix.chave, request)
-
         if(response.status != HttpStatus.OK){
             val problema = response.body() as DeletarChaveXMLProblema?
             logger.info("Problema: $problema")

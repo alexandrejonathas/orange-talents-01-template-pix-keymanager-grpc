@@ -15,7 +15,7 @@ import javax.validation.constraints.Size
 @ValidPixKey
 @Introspected
 data class NovaChavePix(
-    @ValidUUID
+    @field:ValidUUID
     @field:NotBlank
     val clientId: String,
     @field:NotNull
