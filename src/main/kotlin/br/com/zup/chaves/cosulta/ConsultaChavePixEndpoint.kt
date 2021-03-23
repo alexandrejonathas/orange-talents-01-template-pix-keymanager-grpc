@@ -24,9 +24,10 @@ class ConsultaChavePixEndpoint(
         val filtro = request?.paraFiltro(validator)
         val chavePix = filtro?.filtra(repository, client)
 
+        val chaveId = request?.chaveId
         val response = ConsultaChavePixResponse.newBuilder()
-            //.setChaveId(chaveConsulta.chaveId.toString())
-            //.setClienteId(chaveConsulta.clienteId)
+            .setChaveId(if(chaveId?.chaveId?.toInt() == 0) "" else chaveId?.chaveId.toString())
+            .setClienteId(chaveId?.clienteId)
             .setTipoDaChave(chavePix?.tipo)
             .setChave(chavePix?.chave)
             .setTitular(TitularResponse.newBuilder()

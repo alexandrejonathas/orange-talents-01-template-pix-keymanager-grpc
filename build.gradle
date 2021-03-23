@@ -50,7 +50,6 @@ dependencies {
     //Jackson XML
     implementation("io.micronaut.xml:micronaut-jackson-xml")
 
-
     //JPA
     implementation("io.micronaut.sql:micronaut-jdbc-hikari")
     implementation("io.micronaut.data:micronaut-data-hibernate-jpa")
