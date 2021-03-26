@@ -52,7 +52,7 @@ class CadastraChavePixService(
 
 
         chaveCriada = chaveCriada.let { chavePix ->
-                chavePix.chave = createPixResponse.key
+                chavePix.atualiza(createPixResponse.key)
                 chavePix.criadoEm = createPixResponse.createdAt
                 chaveRepository.update(chavePix)
             }

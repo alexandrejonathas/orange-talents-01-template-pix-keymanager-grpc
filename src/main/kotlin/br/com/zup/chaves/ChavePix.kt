@@ -22,7 +22,16 @@ class ChavePix(
 
     var criadoEm: LocalDateTime? = null
 
-    fun pertence(clienteId: String): Boolean{
-        return this.conta.titular?.id.equals(clienteId)
+    fun pertence(clienteId: String): Boolean = this.conta.titular?.id.equals(clienteId)
+
+    fun isAleatoria() = TipoDaChave.CHAVE_ALEATORIA.name == tipo
+
+    fun atualiza(chave: String): Boolean{
+        if(isAleatoria()){
+            this.chave = chave
+            return true
+        }
+        return false
     }
+
 }
